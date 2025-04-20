@@ -1,14 +1,8 @@
-import {
-  View,
-  StyleSheet,
-  FlatList,
-  useWindowDimensions,
-  SafeAreaView,
-} from "react-native";
+import { View, StyleSheet } from "react-native";
 import { useLayoutEffect } from "react";
 import { MEALS, CATEGORIES } from "../../../data/dummy-data";
 
-import MealItem from "../meallAppComponents/MealItem";
+import MealFlatList from "../meallAppComponents/MealFlatList";
 
 export default function MealOverViewScreen({ route, navigation }) {
   useLayoutEffect(() => {
@@ -19,9 +13,7 @@ export default function MealOverViewScreen({ route, navigation }) {
       title: categoryTitle,
     });
   }, [mealId, navigation]);
-  const { width, height } = useWindowDimensions();
 
-  let cols = width > height ? 2 : 1;
   const mealId = route.params.categoryId;
 
   const mealDetail = MEALS.filter((mealData) => {
@@ -30,15 +22,7 @@ export default function MealOverViewScreen({ route, navigation }) {
 
   return (
     <View style={styles.conatiner}>
-      <SafeAreaView>
-        <FlatList
-          data={mealDetail}
-          keyExtractor={(item) => item.id}
-          renderItem={(itemData) => <MealItem item={itemData.item} />}
-          numColumns={cols}
-          key={cols}
-        />
-      </SafeAreaView>
+      <MealFlatList data={mealDetail} />
     </View>
   );
 }
