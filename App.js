@@ -5,13 +5,15 @@ import MealOverViewScreen from "./components/mealApp/screens/MealOverViewScreen"
 import MealDetailsScreen from "./components/mealApp/screens/MealDetailsScreen";
 import CategoryScreen from "./components/mealApp/screens/CategoryScreen";
 import { Ionicons } from "@expo/vector-icons";
+import { Provider } from "react-redux";
 
 import { createDrawerNavigator } from "@react-navigation/drawer";
 
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 import FavoriteFood from "./components/mealApp/screens/FavoriteFood";
-import FavoriteContextProvider from "./store/context/favorite-context";
+import { store } from "./store/redux/store";
+// import FavoriteContextProvider from "./store/context/favorite-context";
 
 const Drawer = createDrawerNavigator();
 
@@ -52,32 +54,36 @@ export default function App() {
     return <AppLoading />;
   }
   return (
-    <FavoriteContextProvider>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Meal-Categories"
-            component={DrawerNavigation}
-            options={{
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="Meal-OverView"
-            component={MealOverViewScreen}
-            options={{
-              title: "Meal Overview",
-            }}
-          />
-          <Stack.Screen
-            name="Meal-Detail"
-            component={MealDetailsScreen}
-            options={{
-              title: "Meal Details",
-            }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </FavoriteContextProvider>
+    <>
+      <Provider store={store}>
+        {/* <FavoriteContextProvider> */}
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              name="Meal-Categories"
+              component={DrawerNavigation}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="Meal-OverView"
+              component={MealOverViewScreen}
+              options={{
+                title: "Meal Overview",
+              }}
+            />
+            <Stack.Screen
+              name="Meal-Detail"
+              component={MealDetailsScreen}
+              options={{
+                title: "Meal Details",
+              }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </Provider>
+      {/* </FavoriteContextProvider> */}
+    </>
   );
 }
