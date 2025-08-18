@@ -1,14 +1,16 @@
-import { useContext } from "react";
-import { FavoriteContext } from "../../../store/context/favorite-context";
+// import { useContext } from "react";
+// import { FavoriteContext } from "../../../store/context/favorite-context";
 import { View, Text, StyleSheet } from "react-native";
 import { MEALS } from "../../../data/dummy-data";
 
 import MealFlatList from "../meallAppComponents/MealFlatList";
+import { useSelector } from "react-redux";
 
 export default function FavoriteFood() {
-  const favoriteFood = useContext(FavoriteContext);
+  // const favoriteFood = useContext(FavoriteContext);
+  const favoriteMealIds = useSelector((state) => state.favoriteMeals.ids);
 
-  const favorites = MEALS.filter((food) => favoriteFood.id.includes(food.id));
+  const favorites = MEALS.filter((food) => favoriteMealIds.includes(food.id));
 
   return (
     <View style={styles.mainContainer}>
