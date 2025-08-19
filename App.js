@@ -2,7 +2,7 @@ import "./gesture-handler";
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 
-import { View, Text, StyleSheet } from "react-native";
+import MainScreen from "./components/expensesApp/screens/MainScreen";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -13,20 +13,5 @@ export default function App() {
   if (!fontsLoaded) {
     return <AppLoading />;
   }
-  return (
-    <View style={styles.conatiner}>
-      <Text style={styles.text}>Hello world</Text>
-    </View>
-  );
+  return <MainScreen />;
 }
-
-const styles = StyleSheet.create({
-  conatiner: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  text: {
-    color: "red",
-  },
-});
