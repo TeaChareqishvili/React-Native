@@ -3,8 +3,12 @@ import { ExpenseColors } from "../../../utils/Colors";
 import { getFormatedDate } from "../../../utils/Date";
 
 export default function ExpenseItem({ description, amount, date }) {
+  function expensePressHandler() {}
   return (
-    <Pressable>
+    <Pressable
+      onPress={expensePressHandler()}
+      style={({ pressed }) => pressed && styles.pressed}
+    >
       <View style={styles.outerContainer}>
         <View>
           <Text style={[styles.textBase, styles.description]}>
@@ -53,5 +57,9 @@ const styles = StyleSheet.create({
   amount: {
     color: ExpenseColors.primary500,
     fontWeight: "bold",
+  },
+
+  pressed: {
+    opacity: 0.75,
   },
 });
