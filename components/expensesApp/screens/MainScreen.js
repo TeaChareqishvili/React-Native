@@ -20,7 +20,7 @@ function ExpensesBottomOverview() {
         headerStyle: { backgroundColor: ExpenseColors.primary500 },
         headerTintColor: "white",
         tabBarStyle: { backgroundColor: ExpenseColors.primary500 },
-        tabBarActiveTintColor: ExpenseColors.accent500,
+        tabBarActiveTintColor: "white",
       }}
     >
       <BottomTabs.Screen
