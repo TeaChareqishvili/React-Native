@@ -9,7 +9,7 @@ export default Colors;
 
 export const ExpenseColors = {
   primary50: "#BED7F3",
-  primary100: "#c6affc",
+  primary100: "#AFDCEC",
   primary200: "#a281f0",
   primary400: "#27374F",
   primary500: "#415a77",

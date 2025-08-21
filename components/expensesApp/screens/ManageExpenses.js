@@ -2,6 +2,7 @@ import { useLayoutEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import IconButton from "../expensiveAppComponents/IconButton";
 import { ExpenseColors } from "../../../utils/Colors";
+import Button from "../expensiveAppComponents/Button";
 
 export default function ManageExpenses({ route, navigation }) {
   const edetedExpenseId = route.params?.expenseId;
@@ -14,8 +15,18 @@ export default function ManageExpenses({ route, navigation }) {
   }, [navigation, isEdeting]);
 
   function deleteExpenseHandler() {}
+  function cancelHandler() {}
+  function confirmHandler() {}
   return (
     <View style={styles.container}>
+      <View style={styles.buttonContainer}>
+        <Button style={styles.button} mode="flat" onPress={cancelHandler}>
+          Cancel
+        </Button>
+        <Button style={styles.button} onPress={confirmHandler}>
+          {isEdeting ? "Update" : "Add"}
+        </Button>
+      </View>
       {isEdeting && (
         <View style={styles.deleteContainer}>
           <IconButton
@@ -35,6 +46,16 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 24,
     backgroundColor: ExpenseColors.primary700,
+  },
+
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  button: {
+    minWidth: 120,
+    marginHorizontal: 8,
   },
 
   deleteContainer: {
