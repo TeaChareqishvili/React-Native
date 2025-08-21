@@ -3,9 +3,9 @@ import { DUMMT_DATA } from "../../data/expensesData";
 
 export const ExpensesContext = createContext({
   expenses: [],
-  updateExpenses: (id, { description, amount, date }) => {},
-  deleteExpenses: (id) => {},
-  addExpenses: ({ description, amount, date }) => {},
+  updateExpense: (id, { description, amount, date }) => {},
+  deleteExpense: (id) => {},
+  addExpense: ({ description, amount, date }) => {},
 });
 
 function expensesReducer(state, action) {
@@ -20,7 +20,9 @@ function expensesReducer(state, action) {
       const updatableExpense = state[updatableExpenseIndex];
       const updatableItem = { ...updatableExpense, ...action.payload.data };
       const updatableExpenses = [...state];
+
       updatableExpenses[updatableExpenseIndex] = updatableItem;
+      console.log(updatableExpenses);
       return updatableExpenses;
     case "DELETE":
       return state.filter((expense) => expense.id !== action.payload);
@@ -39,8 +41,19 @@ export default function ExpenseContextProvider({ children }) {
     dispatch({ type: "DELETE", payload: id });
   }
 
-  function updateExpense(expenseData, id) {
+  function updateExpense(id, expenseData) {
     dispatch({ type: "UPDATE", payload: { id: id, data: expenseData } });
   }
-  return <ExpensesContext.Provider>{children}</ExpensesContext.Provider>;
+
+  const value = {
+    expenses: expensesState,
+    addExpense: addExpense,
+    deleteExpense: deleteExpense,
+    updateExpense: updateExpense,
+  };
+  return (
+    <ExpensesContext.Provider value={value}>
+      {children}
+    </ExpensesContext.Provider>
+  );
 }
