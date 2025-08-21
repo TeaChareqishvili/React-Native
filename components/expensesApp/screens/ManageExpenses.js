@@ -14,9 +14,15 @@ export default function ManageExpenses({ route, navigation }) {
     });
   }, [navigation, isEdeting]);
 
-  function deleteExpenseHandler() {}
-  function cancelHandler() {}
-  function confirmHandler() {}
+  function deleteExpenseHandler() {
+    navigation.goBack();
+  }
+  function cancelHandler() {
+    navigation.goBack();
+  }
+  function confirmHandler() {
+    navigation.goBack();
+  }
   return (
     <View style={styles.container}>
       <View style={styles.buttonContainer}>
